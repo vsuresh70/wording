@@ -31,11 +31,19 @@ public class NumberToWordController {
     @RequestMapping(value = "/{id}", 
 			method = RequestMethod.GET, 
 			headers="Accept=application/html, application/xhtml+xml")
-	public String getWord(@PathVariable("id") Long id, Model model) {
+	public String getWord(@PathVariable("id") String id, Model model) {
 		logger.info("Provider has received request to get person with id: " + id);
-		
-		// Call service to here
-		String num2Word = numberToWordService.convert(id.longValue());
+		String num2Word = "";
+		long param = 0;
+		try  {  
+			param = Long.parseLong(id);  
+		  }  
+		catch(NumberFormatException nfe) {  
+			model.addAttribute("num2word"," not a valid number");
+			return "num2word";
+		  } 
+			// Call service to here
+		num2Word = numberToWordService.convert(param);
 		logger.info("The returned word :"+num2Word);
 		model.addAttribute("num2word",num2Word);
 		

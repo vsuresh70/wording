@@ -22,7 +22,7 @@ public class NumberToWordControllerTest extends AbstractControllerTest {
 		ReflectionTestUtils.setField(numberToWordController, "numberToWordService",
 				numberToWordService);
 		ExtendedModelMap uiModel = new ExtendedModelMap();
-		String result = numberToWordController.getWord(new Long(100), uiModel);
+		String result = numberToWordController.getWord(new String("100"), uiModel);
 		assertNotNull(result);
 		assertEquals(result, "num2word");
 		String word = (String) uiModel.get("num2word");
